@@ -15,5 +15,7 @@
     "puppeteer": "^2.0.0",
     "request": "^2.88.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "minimist": ">=0.2.1"
+  }
 }
