@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&family=Palanquin:wght@700&display=swap');
+
+body {
+    /* background-color: #00487C; */
+    /* background-color: #344966; */
+    background-color: #0D1821;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-size: 25px;
+    font-family: 'Palanquin', sans-serif;
+    text-transform: uppercase;
+    position: relative;
+    top: -5px;
+}
+
+label {
+    display: inline-block;
+  }
+
+button {
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: none;
+    font-weight: bold;
+    color: #FFF;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 5px;
+}
+
+#left {
+    position: absolute;
+}
+
+#right {
+    position: absolute;
+    left: 125px;
+    top: 25px;
+}
+.fa-folder {
+    position: relative;
+    left: 10px;
+    font-size: 25px;
+    top: 5px;
+}
+
+h4 {
+    font
+}
+
+#scrape {
+    /* background-color: #7DD181; */
+    background-color: #00487C;
+    background-color: #344966;
+}
+
+#size {
+    background-color: #ED254E;
+}

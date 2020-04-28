@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Scraper</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://kit.fontawesome.com/a28f3869bb.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="left">
+      <h1>Scraper</h1>
+      <p></p>
+    </div>
+    <div id="right">
+      <input type="text" name="search" id="query" placeholder="what you want what you need?">
+      <i id="path" class="fas fa-folder"></i>
+      <br>
+      <br>
+      Path: <span id="path-location"></span>
+      <br>
+      <br>
+      <label for="radio_1">
+        <input type="radio" name="radio" id="google" />
+        Google
+      </label>
+      <label for="radio_2">
+        <input type="radio" name="radio" id="tumblr" />
+        Tumblr
+      </label>
+      <br/>
+      <br/>
+      <button id="scrape">Scrape</button>
+      <!-- <button id="scrape-tumblr">Scrape (tumblr)</button>
+      <button id="scrape-google">Scrape (google)</button> -->
+      <!-- <button id="path">Path</button> -->
+      <button id="size">Error Check</button>
+    </div>
+    <span id="results"></span>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+  </body>
+</html>

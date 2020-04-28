@@ -1,0 +1,19 @@
+{
+  "name": "s6-scraper",
+  "productName": "S6 Scraper",
+  "description": "Scrape images from Google, Tumblr, Twitter, and Flickr.",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "Jason Agyekum",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "image-size": "^0.8.3",
+    "images-scraper": "^5.0.3",
+    "puppeteer": "^2.0.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {}
+}
