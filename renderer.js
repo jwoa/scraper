@@ -8,7 +8,8 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 var Scraper = require('images-scraper');
 var sizeOf = require('image-size');
-const { dialog } = require('electron').remote
+const remote = require("electron").remote
+const dialog = remote.dialog;
 
 let folderPath;
 let pathButton = document.getElementById("path");
@@ -23,13 +24,18 @@ let results = document.getElementById("results");
 //////////////////////////////////////////
 
 function selectPath() {
-  let options = {properties:["openDirectory", "createDirectory", "promptToCreate"], message: "Select location to save files"};
-  dialog.showOpenDialog(options, (dir) => {
-    console.log(dir)
-    document.getElementById("path-location").innerText = dir;
-    folderPath = document.getElementById("path-location").innerText;
-    console.log(folderPath);
-  })
+  console.log("path button clicked");
+    dialog.showOpenDialog(remote.getCurrentWindow(), {
+        properties: ["openDirectory", "multiSelections"]
+    }).then(result => {
+        if (result.canceled === false) {
+            console.log("Selected directory: ", result.filePaths);
+            folderPath = result.filePaths;
+            document.getElementById("path-location").innerText = folderPath;
+        }
+    }).catch(err => {
+        console.log(err)
+    })
 }
 
 //////////////////////////////////////////
@@ -40,7 +46,7 @@ function selectPath() {
 
 function scrape() {
   let userInput = document.getElementById("query").value;
-  console.log(userInput);
+  console.log("Searching for: ", userInput);
   (async () => {
         const browser = await puppeteer.launch({
             headless: false,
@@ -203,7 +209,7 @@ function scrapeTumblr() {
 
   function sizeCheck() {
     //passsing directoryPath and callback function
-    fs.readdir(folderPath, function (err, files) {
+    fs.readdir(String(folderPath), function (err, files) {
         //handling error
         if (err) {
             return console.log('Unable to check directory: ' + err);
@@ -211,27 +217,31 @@ function scrapeTumblr() {
         //listing all files using forEach
         files.forEach(function (file) {
             let x = path.basename(file);
-            let y = folderPath + "/" + x
+            let currentFile = folderPath + "/" + x
             // Do whatever you want to do with the file
+
+            var stats = fs.statSync(currentFile);
+            console.log("Name: " + x + " Size: " + stats["size"]);
+
             //check size
-            sizeOf(y, function (err, dimensions) {
+            sizeOf(currentFile, function (err, dimensions) {
                 if (err) {
-                    console.log('Unable to check: ' + y);
-                    fs.unlink(y, (err) => {
+                    console.log('Unable to check (Will Delete): ' + currentFile);
+                    fs.unlink(currentFile, (err) => {
                         if (err) {
                             console.error("Error Deleting File: " + err)
                             return
                         }
-                        console.log("Deleted: " + y)
+                        console.log("Deleted: " + currentFile)
                         //file removed
                     })
                 } else if (dimensions.width === 64 && dimensions.height === 64) {
-                    fs.unlink(y, (err) => {
+                    fs.unlink(currentFile, (err) => {
                         if (err) {
                             console.error("Error Deleting File: " + err)
                             return
                         }
-                        console.log("Deleted: " + y)
+                        console.log("Deleted: " + currentFile)
                         //file removed
                     })
                 }
